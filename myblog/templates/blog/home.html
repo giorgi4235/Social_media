@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Home | Social Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Recent Posts</h2>
+        {% for post in posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a>{{ post.author.username }}</a>
+                    </h5>
+                    <hr>
+                    <p class="card-text">{{ post.content }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="img-fluid mb-3" alt="Post image">
+                    {% else %}
+                        <img src="/static/images/default-post-image.jpg" class="img-fluid mb-3" alt="Post without image">
+                    {% endif %}
+                    <p class="text-muted">Posted on {{ post.created_at }}</p>
+                    <a class="btn btn-outline-primary">
+                        <i class="fas fa-heart"></i> {{ post.like.counts }}
+                    </a>
+                    <a href="{% url 'post_detail' post.pk %}" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+    <div class="col-md-4">
+        <h3>Create a Post</h3>
+        <a href="{% url 'create_post' %}" class="btn btn-success mb-4">Create New Post</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Create Post | Social Platform{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Create a New Post</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Create Post</button>
+        </form>
+
+        <!-- Container with flexbox for buttons -->
+        <div class="d-flex justify-content-between mt-3">
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to posts</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
